@@ -61,12 +61,6 @@ const sessionOption = {
      },
 };
 
-// app.get("/",(req,res) => {
-//     res.send("Hi root is working")
-// }); 
-
-
-
 app.use(session(sessionOption));
 app.use(flash());
 
@@ -84,19 +78,6 @@ app.use((req,res,next) => {
     next();
 }); 
 
-// app.get("/demouser", async (req,res) => {
-//     let fakeUser = new User({
-//         email : "student@gmail.com",
-//         username : "delta-student"
-//     });
-
-//     let registeredUser = await User.register(fakeUser,"helloworld");
-//     res.send(registeredUser);
-
-// });
-
-
-
 app.use("/listings",listingRouter)
 app.use("/listings/:id/reviews",reviewRouter)
 app.use("/", UserRouter);
@@ -111,8 +92,6 @@ app.all("/*any", (req, res, next) => {
     res.status(statusCode).render("listings/error.ejs",{message})
   });
   
-
-
 app.listen(8080, ()=> {
     console.log("server is listening to port 8080")
 });  
