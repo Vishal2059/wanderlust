@@ -92,6 +92,8 @@ app.all("/*any", (req, res, next) => {
     res.status(statusCode).render("listings/error.ejs",{message})
   });
   
+
+
 app.listen(8080, ()=> {
     console.log("server is listening to port 8080")
 });  
