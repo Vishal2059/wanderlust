@@ -78,25 +78,20 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.send(
-    `Hi, I am root <br> <a href="/listings">All Listings</a> <br><a href="/signup">SignUp</a> <br><a href="/login">SignIn</a>`
-  );
-});
-
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", UserRouter);
+
+
+app.get("/",(req,res)=>{
+res.redirect("/listings");
+})
+
 
 app.all("/*any", (req, res, next) => {
   next(new ExpressError(404, "Page is not found"));
 });
 
-// add this line in your app.js :
-
-app.get("/",(req,res)=>{
-res.redirect("/listings");
-})
 
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went wrong" } = err;
@@ -104,7 +99,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("listings/error.ejs", { message });
 });
 
-app.listen(8080, () => {
+app.listen(8080, () => { 
   console.log("server is listening to port 8080");
 });
-
